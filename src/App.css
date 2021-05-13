@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  height: 100%;
+  background-image: linear-gradient(305deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+}
+
+#root{
+  height: 100%;
+}
+
+.shadow{
+  background: #debd8069;
+}
+.navbar_bg {
+  background: #266a94 !important;
+}
+
+.nav-item:hover {
+  background: #23485f !important;
+}
