@@ -1,3 +1,4 @@
+import { FilledInput } from '@material-ui/core';
 import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
 import PhoneIphoneRoundedIcon from '@material-ui/icons/PhoneIphoneRounded';
 import React from 'react';
@@ -10,18 +11,36 @@ export default function MyTweets(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.global.selectedPage]);
     const [allUsers, setAllUsers] = React.useState([])
-    const onTweetClick = () => {
-
-    }
+    const [usersCopy, setUsersCopy] = React.useState([])
     const initialise = async () => {
         try {
             props.showLoader("Fetching All Users")
             let allUsers = await fetchAllUsers();
             setAllUsers(allUsers);
+            setUsersCopy(allUsers);
             props.hideLoader();
         } catch (e) {
             props.hideLoader();
         }
+    }
+    const handleSearchKey = async (event) => {
+        setTimeout(() => {
+            searchFromKey(event.target.value)
+        }, 1500);
+    }
+    const searchFromKey = async (key) => {
+        let filteredResults = []
+        if (key === "" || key === undefined)
+            filteredResults = usersCopy
+        else {
+            usersCopy.forEach(tweet => {
+                key = key.toUpperCase()
+                if (tweet.firstName.toUpperCase().includes(key) || tweet.lastName.toUpperCase().includes(key) || tweet.emailId.toUpperCase().includes(key)) {
+                    filteredResults.push(tweet)
+                }
+            })
+        }
+        setAllUsers(filteredResults)
     }
     const generateTweets = () => {
 
@@ -51,6 +70,8 @@ export default function MyTweets(props) {
     return (
         <>
             <div className={"h-100"}>
+                <div><input className="search-field" type="text" placeholder="Find user by name or email" onChange={handleSearchKey} />
+                </div>
                 <div>
                     {
                         generateTweets()

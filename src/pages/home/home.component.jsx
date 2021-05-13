@@ -57,13 +57,12 @@ export default function Home(props) {
                 try {
                     let tweets = [...allTweets]
                     tweets[index].like = tweets[index].isLiked ? parseInt(tweets[index].like) - 1 : parseInt(tweets[index].like) + 1;
-                    if (!tweets[index].isLiked) {
-                        likeTweet({
-                            tweet: {
-                                tweetId: tweetId
-                            }
-                        })
-                    }
+                    likeTweet({
+                        tweet: {
+                            tweetId: tweetId,
+                            like: parseInt(tweets[index].like)
+                        }
+                    })
                     allTweets[index].isLiked = !allTweets[index].isLiked;
                     setAllTweets(tweets);
                 } catch (e) {

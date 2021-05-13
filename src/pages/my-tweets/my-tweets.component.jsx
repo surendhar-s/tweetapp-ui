@@ -221,9 +221,7 @@ export default function MyTweets(props) {
         <>
             <div className={"h-100"}>
                 <div>
-                    {
-                        generateTweets()
-                    }
+                    {allTweets.length === 0 ? <span style={{ margin: "auto", fontWeight: "700" }}>No Tweet found, Tweet soon to share your thoughts!! :)</span> : generateTweets()}
                 </div>
 
             </div>
